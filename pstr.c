@@ -1,27 +1,31 @@
 #include "monty.h"
 
 /**
-* f_pstr - function that prints the string starting at the top of the stack,
-* followed by a new
-* @head: head of stack
-* @counter: line count
-*
-* Return: nothing
-*/
-void f_pstr(stack_t **head, unsigned int counter)
+ * pstr - Function that prints string of the stack
+ * @stack: stack structure
+ * @line_number: number of instruction
+ */
+void pstr(stack_t **stack, UN unsigned int line_number)
 {
-	stack_t *h;
-	(void)counter;
+	stack_t *temp = NULL;
 
-	h = *head;
-	while (h)
+	if (*stack == NULL)
 	{
-		if (h->n > 127 || h->n <= 0)
-		{
-			break;
-		}
-		printf("%c", h->n);
-		h = h->next;
+		putchar(10);
+		return;
 	}
-	printf("\n");
+
+	temp = *stack;
+
+	while (temp)
+	{
+		if ((temp->n < 0 && temp->n > 126) || temp->n == 0)
+		{
+			putchar(10);
+			return;
+		}
+		printf("%c", temp->n);
+		temp = temp->next;
+	}
+	putchar(10);
 }
